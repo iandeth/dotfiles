@@ -1,0 +1,153 @@
+set nocompatible
+set fileformat=unix
+set encoding=utf-8
+set termencoding=utf-8
+set fencs=utf-8,euc-jp,sjis,iso-2022-jp,cp932
+set fileformats=unix,dos,mac
+
+" expand all newly inserted <Tab> chars to softtabstop spaces
+set expandtab
+" number of spaces displayed for hard <Tab> char.
+set tabstop=2
+" use N spaces instead of hard <Tab> char. when it reachs multiple of tabstop
+" spaces, it auto converts to <Tab> s.
+set softtabstop=2
+" make <Tab> work as shiftwidth indention.
+" can delete shiftwidth spaces with one <BS>, even with expandtab mode
+set smarttab
+" how many spaces to add/remove when indent command (>, >>, <, <<) is used
+set shiftwidth=2
+
+" hilight current line
+set cursorline
+
+"set textwidth=78
+"set wrap
+"set linebreak
+set backspace=indent,eol,start
+set whichwrap=b,s,<,>,[,]
+
+" display tab chars - define format
+set listchars=tab:>-
+" diaplay tab chars - enabling
+set list
+
+set history=9999
+"set ruler
+"set number
+set showcmd
+set showmode
+
+" highlight matching parens on inserting the other
+set showmatch
+" disable auto highlighting matching parens on cursor-over
+let loaded_matchparen = 1
+
+syntax on
+set nobackup
+set nohlsearch
+set noswapfile
+
+" c style block indent
+set autoindent
+set smartindent
+" comments will also be indented
+inoremap # X#
+
+" stop at last search hit, don't go back to first hit
+set nowrapscan
+
+" search ignore case, not if uppercase specified
+set ignorecase
+set smartcase
+
+" able to move through buffers without saving changes
+set hidden
+
+" vertical split window on right side - eg) :vert help vert
+set splitright
+
+" display list on command completion
+set wildmode=list:full
+"set wildmenu
+
+" allow recursive directory search with [ :find ] command
+set path+=**
+
+" UTF-8 zenkaku shikaku japanese fixture
+set ambiwidth=double
+
+" auto set fold by indent level, but disable folding by default
+" type 'zi' to enable folding
+set foldmethod=indent
+set nofoldenable
+
+" for moving around buffers
+nnoremap <C-n> :bn<LF>
+nnoremap <C-p> :bp<LF>
+" for moving around Tab Page
+nnoremap gn gt
+nnoremap gp gT
+" for moving around multi window
+" <C-l> is for screen redraw, but can be altered with [ :redraw ]
+nnoremap <C-h> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+
+" rich status line information
+set laststatus=2
+set statusline=[%n]\ %f\ \ %y%{GetStatusEx()}\ %m%h%r=%l/%L,%c%V\ %P
+function! GetStatusEx()
+    let str = &fileformat
+    if has("multi_byte") && &fileencoding != ""
+        let str = &fileencoding . ":" . str
+    endif
+    let str = "[" . str . "]"
+    return str
+endfunction
+
+" for 256color terminals
+if 200 < &t_Co || &term ==# 'screen-bce' || &term ==# 'screen'
+    set t_Co=256
+endif
+
+" use ack
+set grepprg=ack
+
+" vundle
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'jpo/vim-railscasts-theme'
+Plugin 'scrooloose/nerdtree'
+Plugin 'bufexplorer.zip'
+Plugin 'yssl/QFEnter'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'godlygeek/tabular'
+Plugin 'rcmdnk/vim-markdown'
+Plugin 'joker1007/vim-markdown-quote-syntax'
+Plugin 'benjaminwhite/Benokai'
+Plugin 'chriskempson/base16-vim'
+Plugin 'tpope/vim-fugitive'
+call vundle#end()
+
+" need this after vundle#end
+filetype plugin indent on
+
+nmap <Leader>nt :NERDTreeToggle<CR>
+cnoreabbrev nt NERDTreeToggle
+
+let g:bufExplorerDefaultHelp=1
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerSortBy='fullpath'
+
+nmap <Leader>tb :TagbarToggle<CR>
+
+"autocmd BufEnter * colorscheme railscasts
+"autocmd BufEnter *.md colorscheme Benokai
+set background=dark
+colorscheme base16-tomorrow

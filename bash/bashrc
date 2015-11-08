@@ -1,0 +1,66 @@
+if [ "$PS1" ]; then
+    PS1='[\W]\$ '
+    alias ll='ls -lhaG'
+    alias lm='ls -1G'
+    alias screen='screen -U -D -RR'
+    if tty -s; then
+        stty stop undef
+        stty start undef
+        stty -ixon  # for os x
+    fi
+    export HISTSIZE=50000
+    export HISTCONTROL=ignoreboth
+    export HISTIGNORE="exit:screen:[bf]g:cd:history:history *"
+    export IGNOREEOF=10
+
+    # adding git branch/status in prompt
+    BASH_EXT_DIR=$HOME/.bash
+    source $BASH_EXT_DIR/git-prompt.bash
+    source $BASH_EXT_DIR/git-completion.bash
+    source $BASH_EXT_DIR/git-prompt-jondavidjohn.bash
+
+    # for history sharing over multiple shells
+    function share_history {
+        history -a
+        history -c
+        history -r
+        git_prompt
+    }
+    PROMPT_COMMAND='share_history'
+    shopt -u histappend
+fi
+
+export EDITOR=vim
+
+# perl
+export PERL5LIB=/usr/local/Cellar/perl/5.20.1/lib/5.20.1:$PERL5LIB
+export PATH=/usr/local/Cellar/perl/5.20.1/bin:$PATH
+
+# rbenv
+eval "$(rbenv init -)"
+
+# nodenv
+export PATH="$HOME/.nodenv/bin:$PATH"
+eval "$(nodenv init -)"
+
+# spring
+export PATH=./bin:$PATH
+
+# go
+export GOPATH=$HOME/workspace/go
+
+# Google Code
+export G=$HOME/workspace/googlecode
+
+# Kaizen
+export RAILS_ENV="development"
+export BE="bundle exec"
+function kzssh {
+  ec2ls | percol | cut -f 6 | pbcopy && ssh iandeth@`pbpaste`
+}
+
+# for curl with user-agent iphone
+export UA_SP="Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5"
+
+# for ec2list
+source ~/.aws
