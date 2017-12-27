@@ -126,6 +126,7 @@ Plugin 'bufexplorer.zip'
 Plugin 'yssl/QFEnter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'othree/yajs.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'godlygeek/tabular'
 Plugin 'rcmdnk/vim-markdown'
@@ -133,6 +134,7 @@ Plugin 'joker1007/vim-markdown-quote-syntax'
 Plugin 'benjaminwhite/Benokai'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'othree/eregex.vim'
 call vundle#end()
 
 " need this after vundle#end
@@ -151,3 +153,7 @@ nmap <Leader>tb :TagbarToggle<CR>
 "autocmd BufEnter *.md colorscheme Benokai
 set background=dark
 colorscheme base16-tomorrow
+
+" paste command alias
+nmap <Leader>sp :set paste<CR>
+nmap <Leader>np :set nopaste<CR>
