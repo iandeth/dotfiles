@@ -13,21 +13,22 @@ if [ "$PS1" ]; then
     export HISTIGNORE="exit:screen:[bf]g:cd:history:history *"
     export IGNOREEOF=10
 
-    # adding git branch/status in prompt
-    BASH_EXT_DIR=$HOME/.bash
-    source $BASH_EXT_DIR/git-prompt.bash
-    source $BASH_EXT_DIR/git-completion.bash
-    source $BASH_EXT_DIR/git-prompt-jondavidjohn.bash
-
     # for history sharing over multiple shells
     function share_history {
         history -a
         history -c
         history -r
-        git_prompt
     }
     PROMPT_COMMAND='share_history'
     shopt -u histappend
+fi
+
+# adding git branch/status in prompt
+# brew install bash-git-prompt
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  GIT_PROMPT_ONLY_IN_REPO=1
+  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
 
 export EDITOR=vim
