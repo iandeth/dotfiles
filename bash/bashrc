@@ -27,6 +27,7 @@ fi
 # brew install bash-git-prompt
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   GIT_PROMPT_ONLY_IN_REPO=1
+  GIT_PROMPT_THEME=Solarized
   __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
   source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
@@ -44,14 +45,19 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.nodenv/bin:$PATH"
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 
-# spring
-export PATH=./bin:$PATH
+# npm
+export PATH="./node_modules/.bin:$PATH"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
 # go
 export GOPATH=$HOME/workspace/go
 
-# Google Code
-export G=$HOME/workspace/googlecode
+# google cloud sdk
+export PATH="$HOME/.google-cloud-sdk/bin:$PATH"
 
 # Kaizen
 export RAILS_ENV="development"
@@ -65,3 +71,10 @@ export UA_SP="Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) 
 
 # for ec2list
 source ~/.aws
+
+# for karma
+source ~/.browserstack
+
+# support github
+export C=$HOME/workspace/cse
+export CD=$HOME/workspace/cse-docs

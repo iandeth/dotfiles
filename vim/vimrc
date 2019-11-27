@@ -126,15 +126,20 @@ Plugin 'bufexplorer.zip'
 Plugin 'yssl/QFEnter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'othree/yajs.vim'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'godlygeek/tabular'
 Plugin 'rcmdnk/vim-markdown'
 Plugin 'joker1007/vim-markdown-quote-syntax'
+Plugin 'vim-python/python-syntax'
 Plugin 'benjaminwhite/Benokai'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'othree/eregex.vim'
+Plugin 'othree/yajs.vim'
+Plugin 'othree/es.next.syntax.vim'
+Plugin 'mustache/vim-mustache-handlebars'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'isruslan/vim-es6'
+" Plugin 'kchmck/vim-coffee-script'
 call vundle#end()
 
 " need this after vundle#end
@@ -157,3 +162,8 @@ colorscheme base16-tomorrow
 " paste command alias
 nmap <Leader>sp :set paste<CR>
 nmap <Leader>np :set nopaste<CR>
+
+aug python
+    " ftype/python.vim overwrites this
+    au FileType python setlocal ts=2 sts=2 sw=2
+aug end
