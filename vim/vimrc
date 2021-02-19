@@ -124,7 +124,7 @@ Plugin 'jpo/vim-railscasts-theme'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bufexplorer.zip'
 Plugin 'yssl/QFEnter'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'godlygeek/tabular'
 Plugin 'rcmdnk/vim-markdown'
@@ -137,9 +137,8 @@ Plugin 'othree/eregex.vim'
 Plugin 'othree/yajs.vim'
 Plugin 'othree/es.next.syntax.vim'
 Plugin 'mustache/vim-mustache-handlebars'
-" Plugin 'pangloss/vim-javascript'
-" Plugin 'isruslan/vim-es6'
-" Plugin 'kchmck/vim-coffee-script'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'prettier/vim-prettier'
 call vundle#end()
 
 " need this after vundle#end
@@ -156,8 +155,9 @@ nmap <Leader>tb :TagbarToggle<CR>
 
 "autocmd BufEnter * colorscheme railscasts
 "autocmd BufEnter *.md colorscheme Benokai
-set background=dark
-colorscheme base16-tomorrow
+"set background=dark
+"colorscheme base16-tomorrow
+colorscheme base16-mocha
 
 " paste command alias
 nmap <Leader>sp :set paste<CR>
@@ -167,3 +167,25 @@ aug python
     " ftype/python.vim overwrites this
     au FileType python setlocal ts=2 sts=2 sw=2
 aug end
+
+" prettier https://bit.ly/2UFQtAo
+let g:prettier#autoformat = 0
+let g:prettier#config#print_width = '80'
+let g:prettier#config#tab_width = '2'
+let g:prettier#config#use_tabs = 'false'
+let g:prettier#config#semi = 'true'
+let g:prettier#config#single_quote = 'false'
+let g:prettier#config#trailing_comma = 'es5'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'false'
+let g:prettier#config#arrow_parens = 'always'
+let g:prettier#config#parser = ''
+let g:prettier#config#require_pragma=  'false'
+let g:prettier#config#prose_wrap = 'preserve'
+let g:prettier#config#html_whitespace_sensitivity = 'css'
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" ctrlp
+let g:ctrlp_root_markers = ['.gitignore']
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$|node_modules'
