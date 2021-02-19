@@ -156,8 +156,8 @@ nmap <Leader>tb :TagbarToggle<CR>
 "autocmd BufEnter * colorscheme railscasts
 "autocmd BufEnter *.md colorscheme Benokai
 "set background=dark
-"colorscheme base16-tomorrow
-colorscheme base16-mocha
+colorscheme base16-tomorrow
+"colorscheme base16-mocha
 
 " paste command alias
 nmap <Leader>sp :set paste<CR>
